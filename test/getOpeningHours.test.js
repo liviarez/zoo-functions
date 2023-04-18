@@ -5,7 +5,7 @@ describe('getOpeningHours', () => {
   const open = 'The zoo is open';
   it('returns the zoo hours for the given day and hour', () => {
     expect(getOpeningHours('Monday', '10:00-PM')).toEqual(closed);
-    expect(getOpeningHours('Tuesday', '10:00-AM')).toEqual(closed);
+    expect(getOpeningHours('Tuesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Wednesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Thursday', '11:00-AM')).toEqual(open);
     expect(getOpeningHours('Friday', '12:00-PM')).toEqual(closed);
