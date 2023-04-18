@@ -10,16 +10,19 @@ const countEntrants = (entrants) => {
       } else {
         accumulator.senior += 1;
       }
-      return accumulator;
+      return { child: accumulator.child, adult: accumulator.adult, senior: accumulator.senior };
     },
     { child: 0, adult: 0, senior: 0 },
   );
 };
 
 const calculateEntry = (entrants) => {
+  if (!entrants) {
+    return 0;
+  }
   const totalPriceChild = countEntrants(entrants).child * prices.child;
   const totalPriceAdult = countEntrants(entrants).adult * prices.adult;
-  const totalPriceSenior = countEntrants(entrants).Senior * prices.senior;
+  const totalPriceSenior = countEntrants(entrants).senior * prices.senior;
   console.log(totalPriceSenior + totalPriceAdult + totalPriceChild);
   return (totalPriceAdult + totalPriceChild + totalPriceSenior);
 };
