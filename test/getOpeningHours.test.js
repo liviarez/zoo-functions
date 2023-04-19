@@ -21,5 +21,11 @@ describe('getOpeningHours', () => {
     expect(() => getOpeningHours('Monday', '13:00-PM')).toThrow('The hour must be between 0 and 12');
     expect(() => getOpeningHours('Monday', '12:60-PM')).toThrow('The minutes must be between 0 and 59');
     expect(() => getOpeningHours('Monday', '10:00-XX')).toThrow('The abbreviation must be \'AM\' or \'PM\'');
+    expect(() => getOpeningHours('Saturday', 'pw:ah-Am')).toThrow('The hour should represent a number');
+  });
+
+  it('Function is not case sensitive', () => {
+    expect(getOpeningHours('mondaY', '11:25-Am')).toBe('The zoo is closed');
+    expect(getOpeningHours('TUesdAy', '9:45-aM')).toBe('The zoo is open');
   });
 });
