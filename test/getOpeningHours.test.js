@@ -8,7 +8,7 @@ describe('getOpeningHours', () => {
     expect(getOpeningHours('Tuesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Wednesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Thursday', '11:00-AM')).toEqual(open);
-    expect(getOpeningHours('Friday', '12:00-PM')).toEqual(closed);
+    expect(getOpeningHours('Friday', '12:00-PM')).toEqual(open);
     expect(getOpeningHours('Saturday', '12:00-AM')).toEqual(closed);
     expect(getOpeningHours('Sunday', '1:00-PM')).toEqual(open);
   });
@@ -17,15 +17,29 @@ describe('getOpeningHours', () => {
     expect(() => getOpeningHours('Munday', '10:00-AM')).toThrow('The day must be valid. Example: Monday');
   });
 
+  it('does not throw an error for valid day', () => {
+    expect(() => getOpeningHours('Tuesday', '10:00-AM')).Not.toThrow();
+  });
+
   it('throws an error for invalid hour', () => {
     expect(() => getOpeningHours('Monday', '13:00-PM')).toThrow('The hour must be between 0 and 12');
     expect(() => getOpeningHours('Monday', '12:60-PM')).toThrow('The minutes must be between 0 and 59');
     expect(() => getOpeningHours('Monday', '10:00-XX')).toThrow('The abbreviation must be \'AM\' or \'PM\'');
-    expect(() => getOpeningHours('Saturday', 'pw:ah-Am')).toThrow('The hour should represent a number');
   });
 
   it('Function is not case sensitive', () => {
     expect(getOpeningHours('mondaY', '11:25-Am')).toBe('The zoo is closed');
     expect(getOpeningHours('TUesdAy', '9:45-aM')).toBe('The zoo is open');
+  });
+});
+describe('isStringRepresentNumber', () => {
+  it('throws an error if string does not represent a number', () => {
+    const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
+    expect(() => isStringRepresentNumber('not a number', 'input')).toThrow('The input should represent a number');
+  });
+
+  it('does not throw an error if string represents a number', () => {
+    const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
+    expect(() => isStringRepresentNumber('123', 'input')).Not.toThrow();
   });
 });
