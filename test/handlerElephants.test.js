@@ -18,8 +18,7 @@ describe('Testes da função HandlerElephants', () => {
   });
 
   it('Teste da função computeData, é esperado que ela retorne null caso não exista parâmetro', () => {
-    const resultFromCompute = handlerElephants();
-    expect(resultFromCompute).toEqual(null);
+    expect(handlerElephants('anything')).toBe(null);
   });
 
   it('Teste da função handlerElephants, é esperado que ela retorne undifined caso não receba nenhum parâmetro', () => {
