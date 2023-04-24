@@ -1,4 +1,5 @@
 const getOpeningHours = require('../src/getOpeningHours');
+const data = require('../data/zoo_data');
 
 describe('getOpeningHours', () => {
   const closed = 'The zoo is closed';
@@ -6,6 +7,7 @@ describe('getOpeningHours', () => {
   it('returns the zoo hours for the given day and hour', () => {
     expect(getOpeningHours('Monday', '10:00-PM')).toEqual(closed);
     expect(getOpeningHours('Monday', '12:00-PM')).toEqual(closed);
+    expect(getOpeningHours()).toEqual(data.hours);
     expect(getOpeningHours('Tuesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Wednesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Thursday', '11:00-AM')).toEqual(open);
