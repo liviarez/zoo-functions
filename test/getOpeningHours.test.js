@@ -34,15 +34,3 @@ describe('getOpeningHours', () => {
     expect(getOpeningHours('TUesdAy', '9:45-aM')).toBe('The zoo is open');
   });
 });
-
-//describe('isStringRepresentNumber', () => {
-  // it('throws an error if string does not represent a number', () => {
-  //   const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
-  //   expect(() => isStringRepresentNumber('not a number', 'input')).toThrow('The input should represent a number');
-  // });
-
-  // it('does not throw an error if string represents a number', () => {
-  //   const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
-  //   expect(() => isStringRepresentNumber('123', 'input')).Not.toThrow();
-  // });
-//});
