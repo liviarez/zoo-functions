@@ -5,6 +5,7 @@ describe('getOpeningHours', () => {
   const open = 'The zoo is open';
   it('returns the zoo hours for the given day and hour', () => {
     expect(getOpeningHours('Monday', '10:00-PM')).toEqual(closed);
+    expect(getOpeningHours('Monday', '12:00-PM')).toEqual(closed);
     expect(getOpeningHours('Tuesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Wednesday', '10:00-AM')).toEqual(open);
     expect(getOpeningHours('Thursday', '11:00-AM')).toEqual(open);
@@ -18,13 +19,14 @@ describe('getOpeningHours', () => {
   });
 
   it('does not throw an error for valid day', () => {
-    expect(() => getOpeningHours('Tuesday', '10:00-AM')).Not.toThrow();
+    expect(() => getOpeningHours('Tuesday', '10:00-AM')).not.toThrow();
   });
 
   it('throws an error for invalid hour', () => {
     expect(() => getOpeningHours('Monday', '13:00-PM')).toThrow('The hour must be between 0 and 12');
     expect(() => getOpeningHours('Monday', '12:60-PM')).toThrow('The minutes must be between 0 and 59');
     expect(() => getOpeningHours('Monday', '10:00-XX')).toThrow('The abbreviation must be \'AM\' or \'PM\'');
+    expect(() => getOpeningHours('Monday', '10:p0-AM')).toThrow('The minutes should represent a number');
   });
 
   it('Function is not case sensitive', () => {
@@ -32,14 +34,15 @@ describe('getOpeningHours', () => {
     expect(getOpeningHours('TUesdAy', '9:45-aM')).toBe('The zoo is open');
   });
 });
-describe('isStringRepresentNumber', () => {
-  it('throws an error if string does not represent a number', () => {
-    const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
-    expect(() => isStringRepresentNumber('not a number', 'input')).toThrow('The input should represent a number');
-  });
 
-  it('does not throw an error if string represents a number', () => {
-    const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
-    expect(() => isStringRepresentNumber('123', 'input')).Not.toThrow();
-  });
-});
+//describe('isStringRepresentNumber', () => {
+  // it('throws an error if string does not represent a number', () => {
+  //   const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
+  //   expect(() => isStringRepresentNumber('not a number', 'input')).toThrow('The input should represent a number');
+  // });
+
+  // it('does not throw an error if string represents a number', () => {
+  //   const isStringRepresentNumber = getOpeningHours('isStringRepresentNumber');
+  //   expect(() => isStringRepresentNumber('123', 'input')).Not.toThrow();
+  // });
+//});
